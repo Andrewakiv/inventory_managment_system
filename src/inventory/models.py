@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import Profile
 
 
 class Material(models.Model):
@@ -12,6 +13,7 @@ class Material(models.Model):
     unit_price = models.DecimalField(max_digits=10, decimal_places=2)
     unit = models.CharField(max_length=10, choices=Unit.choices)
     quantity = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    company = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return f'{self.name} - {self.unit}'
@@ -19,6 +21,7 @@ class Material(models.Model):
 
 class Transaction(models.Model):
     material = models.ForeignKey(Material, on_delete=models.CASCADE)
+    company = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     quantity = models.DecimalField(max_digits=10, decimal_places=2)
     transaction_type = models.CharField(
         max_length=3, choices=[("IN", "Incoming"), ("OUT", "Outgoing")]
