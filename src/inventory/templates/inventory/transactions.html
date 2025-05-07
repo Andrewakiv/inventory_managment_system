@@ -1,0 +1,77 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<button
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal"
+>
+  Filters
+</button>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Set up filters</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+	  <form method="get">
+      <div class="modal-body">
+          Start date:
+          <input type="date" class="form-control" name="date__gte" value="{{ request.GET.date__gte }}"/>
+          End date:
+          <input type="date" class="form-control" name="date__lte" value="{{ request.GET.date__lte }}"/>
+          Type:
+          <select class="form-select" name="transaction_type">
+            <option value="">All</option>
+            <option value="IN">In</option>
+            <option value="OUT">Out</option>
+          </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+		<button class="btn btn-primary" type="submit">Filter</button>
+      </div>
+	</form>
+    </div>
+  </div>
+</div>
+
+<table class="table table-striped">
+	<thead>
+	  <tr>
+			<th scope="col">#</th>
+			<th scope="col">Material</th>
+			<th scope="col">Quantity</th>
+			<th scope="col">Transaction type</th>
+			<th scope="col">Date</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  {% for transaction in transactions %}
+	  <tr {% if transaction.transaction_type == "IN" %}class="table-success"{% else %}class="table-danger"{% endif %}>
+			<th scope="row">{{ forloop.counter }}</th>
+			<td>{{ transaction.material }}</td>
+			<td>{{ transaction.quantity }}</td>
+			<td>{{ transaction.transaction_type }}</td>
+			<td>{{ transaction.date }}</td>
+	  </tr>
+	  {% endfor %}
+	</tbody>
+</table>
+{% endblock content %}

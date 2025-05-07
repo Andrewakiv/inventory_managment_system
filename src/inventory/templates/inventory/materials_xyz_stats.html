@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+    <button class="btn btn-primary" type="submit">Download report (.xlsx)</button>
+</form>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Average expenses</th>
+      <th scope="col">Standart deviation</th>
+      <th scope="col">Variance</th>
+      <th scope="col">XYZ Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in pd_data %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{ item.name }}</td>
+      <td>{{ item.avg }}</td>
+      <td>{{ item.std_dev }}</td>
+      <td>{{ item.cv }}</td>
+      <td>{% if item.cv < 0.10 %}X{% elif item.cv < 0.25 %}Y{% else %}Z{% endif %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}

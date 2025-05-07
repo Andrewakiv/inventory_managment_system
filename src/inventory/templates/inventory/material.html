@@ -1,0 +1,122 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block content %}
+<div class="row">
+  <div class="col-sm-4">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Name: {{ material.name }}</li>
+      <li class="list-group-item">Price: {{ material.unit_price }}</li>
+      <li class="list-group-item">Current quantity: {{ material.quantity }}</li>
+      <li class="list-group-item">Unit: {{ material.unit }}</li>
+    </ul>
+  </div>
+
+  <div class="col-sm-8">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="history-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#history"
+          type="button"
+          role="tab"
+          aria-controls="history"
+          aria-selected="true"
+        >
+          History
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="profile-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#profile"
+          type="button"
+          role="tab"
+          aria-controls="profile"
+          aria-selected="false"
+        >
+          Statistics
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="contact-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#contact"
+          type="button"
+          role="tab"
+          aria-controls="contact"
+          aria-selected="false"
+        >
+          Contact
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content container" id="myTabContent">
+      <div
+        class="tab-pane fade show active"
+        id="history"
+        role="tabpanel"
+        aria-labelledby="history-tab"
+      >
+	  	<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Material</th>
+					<th scope="col">Quantity</th>
+					<th scope="col">Transaction type</th>
+					<th scope="col">Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for transaction in material.transaction_set.all %}
+				<tr {% if transaction.transaction_type == "IN" %}class="table-success"{% else %}class="table-danger"{% endif %}>
+					<th scope="row">{{ forloop.counter }}</th>
+					<td>{{ transaction.material }}</td>
+					<td>{{ transaction.quantity }}</td>
+					<td>{{ transaction.transaction_type }}</td>
+					<td>{{ transaction.date }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="profile"
+        role="tabpanel"
+        aria-labelledby="profile-tab"
+      >
+	  <div class="container mt-3" id="chartContainer" data-material-id="{{ material.id }}">
+		<form id="filterForm" class="d-flex align-items-center gap-2">
+		  <label for="year" class="me-2 mb-0">Choose a year:</label>
+		  <select class="form-select w-auto" name="year" id="year"></select>
+		  <input class="btn btn-primary" type="submit" value="Load" name="_load">
+		</form>
+		<canvas id="salesChart" class="mt-4"></canvas>
+	  </div>
+	  
+      </div>
+      <div
+        class="tab-pane fade"
+        id="contact"
+        role="tabpanel"
+        aria-labelledby="contact-tab"
+      >
+        ...
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+  <script src="{% static 'js/inventory_charts.js' %}"></script>
+{% endblock %}

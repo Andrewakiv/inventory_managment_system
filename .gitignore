@@ -1,0 +1,17 @@
+# Default ignored files
+/shelf/
+/.idea
+/venv
+/.venv
+/.env
+env
+/.vscode
+/*/.env
+/.DS_Store
+__pycache__/
+django.log
+celerybeat-schedule.*
+
+public/*
+!public/media/.gitkeep
+!public/static/.gitkeep
