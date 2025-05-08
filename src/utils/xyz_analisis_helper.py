@@ -7,7 +7,7 @@ def get_xyz_statistics(data):
     if df.empty:
         return []
 
-    df["month"] = pd.to_datetime(df["transaction__date"]).dt.to_period("M")
+    df["month"] = pd.to_datetime(df["month_datetime"]).dt.to_period("M")
 
     stats = (
         df.groupby("id")["ttl_amount_pu"]
