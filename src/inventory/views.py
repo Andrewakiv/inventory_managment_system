@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Material, Transaction
 from .forms import MaterialForm, TransactionForm
-from .filters import TransactionFilter
+from .filters import TransactionFilter, MaterialFilter
 from utils.transaction_helper import check_transaction
 from utils.abc_analysis_helper import get_abc_statistics
 from utils.xyz_analisis_helper import get_xyz_statistics
@@ -17,6 +17,8 @@ from utils.chart_helper import months, get_year_dict, colorPrimary
 @login_required
 def materials_view(request):
     materials = Material.objects.filter(company=request.user.profile)
+    my_filter = MaterialFilter(request.GET, queryset=materials)
+    materials = my_filter.qs
     return render(request, "inventory/materials.html", {"materials": materials})
 
 
