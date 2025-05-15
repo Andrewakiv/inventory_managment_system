@@ -10,9 +10,8 @@
 9,"Скласти Roadmap (EPICs, Features)",Product Management,P1,Є карта релізів з групуванням по епіках
 10,Створити Prototypes / Mock-ups,UI/UX,P0,"Прототипи затверджено, адаптовані під MVP"
 11,Скласти Backlog (E2E Tasks),Backlog Management,P0,Завдання покривають повний функціонал MVP
-12,Написати Acceptance Criteria,QA / Product Ownership,P0,Критерії прийняття сформульовані для кожної User Story
-13,Сформулювати Solution Statement,Technical Vision,P1,Документ описує запропоноване рішення
-14,Провести SWOT-аналіз,Business Strategy,P2,Аналіз містить 4 частини + висновки
-15,Скласти опис MWP Solution,MVP Scope / Deliverables,P0,"Мінімальний робочий продукт описано, готово до реалізації"
-16,Написати BRD,Documentation,P0,Business Requirements узгоджені і затверджені
-17,Написати Scope of Work (SoW),Project Management,P0,"SoW містить межі проєкту, етапи, результати"
+12,Сформулювати Solution Statement,Technical Vision,P1,Документ описує запропоноване рішення
+13,Провести SWOT-аналіз,Business Strategy,P2,Аналіз містить 4 частини + висновки
+14,Скласти опис MWP Solution,MVP Scope / Deliverables,P0,"Мінімальний робочий продукт описано, готово до реалізації"
+15,Написати BRD,Documentation,P0,Business Requirements узгоджені і затверджені
+16,Написати Scope of Work (SoW),Project Management,P0,"SoW містить межі проєкту, етапи, результати"
