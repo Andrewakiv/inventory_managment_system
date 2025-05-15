@@ -1,0 +1,18 @@
+№,Назва задачі,Тип / Категорія,Пріоритет,Acceptance Criteria (Критерії прийняття)
+1,Сформулювати Problem Statement,Discovery / Research,P0,"Є чітке формулювання проблеми, затверджене командою"
+2,Побудувати Customer Journey Map,UX / Discovery,P1,Карта клієнтського шляху відображає основні етапи та точки взаємодії
+3,Описати Process Flow,Business Analysis,P1,"Є блок-схема або BPMN, затверджена командою"
+4,Описати Work Flow,Business Analysis,P2,Готовий робочий процес у вигляді діаграми
+5,Створити Current State Diagram,As-Is Diagram,P2,Є візуалізація поточного стану системи
+6,Створити Target State Diagram,To-Be Diagram,P2,Є діаграма майбутнього стану
+7,Створити User Personas,UX Research,P1,"Мінімум 3 персони з демографією, цілями, болями"
+8,Створити User Story Mapping,Product Planning,P0,Готова карта MVP з ключовими історіями
+9,"Скласти Roadmap (EPICs, Features)",Product Management,P1,Є карта релізів з групуванням по епіках
+10,Створити Prototypes / Mock-ups,UI/UX,P0,"Прототипи затверджено, адаптовані під MVP"
+11,Скласти Backlog (E2E Tasks),Backlog Management,P0,Завдання покривають повний функціонал MVP
+12,Написати Acceptance Criteria,QA / Product Ownership,P0,Критерії прийняття сформульовані для кожної User Story
+13,Сформулювати Solution Statement,Technical Vision,P1,Документ описує запропоноване рішення
+14,Провести SWOT-аналіз,Business Strategy,P2,Аналіз містить 4 частини + висновки
+15,Скласти опис MWP Solution,MVP Scope / Deliverables,P0,"Мінімальний робочий продукт описано, готово до реалізації"
+16,Написати BRD,Documentation,P0,Business Requirements узгоджені і затверджені
+17,Написати Scope of Work (SoW),Project Management,P0,"SoW містить межі проєкту, етапи, результати"
