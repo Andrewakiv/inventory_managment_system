@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    container_name: db
+    restart: always
+    volumes:
+      -  db_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - inventory_net
+    environment:
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_DB: ${PG_DB}
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin/data
+    depends_on:
+      - db
+    networks:
+      - inventory_net
+
+networks:
+  inventory_net:
+
+volumes:
+  db_data:
+  pgadmin_data:

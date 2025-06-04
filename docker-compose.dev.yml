@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  web-dev:
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    container_name: web-dev
+    restart: on-failure
+    volumes:
+      - static_volume:/home/web/static
+      - media_volume:/home/web/media
+    env_file:
+      - .env
+    networks:
+      - inventory_net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  nginx:
+    build: ./configs/nginx
+    container_name: nginx
+    volumes:
+      - static_volume:/home/web/static
+      - media_volume:/home/web/media
+    depends_on:
+      - web-dev
+    ports:
+      - "80:80"
+    networks:
+      - inventory_net
+
+networks:
+  inventory_net:
+    name: inventory_net
+
+volumes:
+  static_volume:
+  media_volume:
