@@ -1,16 +1,18 @@
 # Default ignored files
 /shelf/
 /.idea
-/venv
-/.venv
-/.env
-env
 /.vscode
 /*/.env
 /.DS_Store
 __pycache__/
 django.log
 celerybeat-schedule.*
+
+.env
+.venv/
+venv/
+env/
+ENV/
 
 public/*
 !public/media/.gitkeep

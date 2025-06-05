@@ -192,3 +192,9 @@ def get_sales_chart(request, year, material_id):
             },
         }
     )
+
+
+from .air_models import MaterialConsumption
+def test_airflow_table(request):
+    m_comp = MaterialConsumption.objects.all()
+    return render(request, "inventory/m_comp.html", {"m_comp": m_comp})

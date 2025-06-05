@@ -8,7 +8,9 @@ from .views import (
     materials_abc_view,
     materials_xyz_view,
     get_filter_options,
-    get_sales_chart
+    get_sales_chart,
+    
+    test_airflow_table
 )
 
 app_name = "inventory"
@@ -23,4 +25,7 @@ urlpatterns = [
     path("material-xyz-stats/", materials_xyz_view, name="materials_xyz_stats"),
     path("filter-options/", get_filter_options, name="chart-filter-options"),
     path("sales/<int:year>/<int:material_id>/", get_sales_chart, name="chart-sales"),
+    
+    
+    path("airflow-table/", test_airflow_table, name="airflow_table"),
 ]
