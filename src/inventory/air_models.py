@@ -38,7 +38,7 @@ class Order(models.Model):
         managed = False
 
     def __str__(self):
-        return f"Order {self.id} by {self.client_name}"
+        return f"Order {self.id} by {self.client_name} at {self.created_at}"
 
 
 class ConsumptionStandard(models.Model):

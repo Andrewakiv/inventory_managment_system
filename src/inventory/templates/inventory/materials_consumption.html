@@ -6,13 +6,13 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">id</th>
-      <th scope="col">order id</th>
-      <th scope="col">material id</th>
-      <th scope="col">quantity</th>
+      <th scope="col">Order</th>
+      <th scope="col">Material</th>
+      <th scope="col">Quantity</th>
     </tr>
   </thead>
   <tbody>
-    {% for material in m_comp %}
+    {% for material in m_cons %}
     <tr>
       <th scope="row">{{ forloop.counter }}</th>
       <td>{{ material.id }}</a></td>
