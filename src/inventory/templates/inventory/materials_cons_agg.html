@@ -1,0 +1,26 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Material name</th>
+      <th scope="col">Date</th>
+      <th scope="col">Units</th>
+      <th scope="col">Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for material in data %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{ material.material__name }}</a></td>
+      <td>{{ material.date }}</td>
+      <td>{{ material.material__unit }}</td>
+      <td>{{ material.total_quantity }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}

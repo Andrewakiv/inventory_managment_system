@@ -1,0 +1,81 @@
+x-airflow-common:
+  &airflow-common
+  image: apache/airflow:2.8.2-python3.10
+  environment:
+    - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+    - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+    - AIRFLOW__CORE__LOAD_EXAMPLES=False
+    - AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION=False
+    - AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True
+    - PYTHONPATH=/opt/airflow
+    - AIRFLOW_UID=0
+  volumes:
+    - ./airflow/dags:/opt/airflow/dags
+    - logs:/opt/airflow/logs
+    - /var/run/docker.sock:/var/run/docker.sock
+  user: "0:0"
+  restart: always
+  depends_on:
+    - postgres
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    networks:
+      - inventory_net
+
+  init-db:
+    image: postgres:15
+    depends_on:
+      - db
+    volumes:
+      - ./airflow/sql:/sql
+      - ./airflow/bin/init_db.sh:/docker-entrypoint-initdb.d/init_db.sh
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${PG_DB}
+      DB_USER: ${PG_USER}
+      DB_PASSWORD: ${PG_PASSWORD}
+    entrypoint: [ "bash", "/docker-entrypoint-initdb.d/init_db.sh" ]
+    networks:
+      - inventory_net
+
+  init:
+    <<: *airflow-common
+    command: >
+      bash -c "airflow db migrate &&
+      airflow users create --username admin --password admin --firstname Admin --lastname Admin --role Admin --email admin@example.org"
+    networks:
+      - inventory_net
+  
+
+  scheduler:
+    <<: *airflow-common
+    command: scheduler
+    networks:
+      - inventory_net
+
+  webserver:
+    <<: *airflow-common
+    ports:
+      - "8080:8080"
+    command: webserver
+    networks:
+      - inventory_net
+
+volumes:
+  postgres-db:
+  etl-db:
+  logs:
+
+networks:
+  inventory_net:
